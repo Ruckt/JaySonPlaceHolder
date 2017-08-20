@@ -9,14 +9,14 @@
 import Foundation
 import UIKit
 
-extension AlbumViewController {
+extension AlbumViewController: UICollectionViewDelegateFlowLayout {
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.thumbnailsArray.count
+        return self.thumbnailsArray.count * self.multiplier
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -27,14 +27,21 @@ extension AlbumViewController {
                 print("Unable to dequeue a thumbnail cell")
                 return UICollectionViewCell.init()
         }
-        
-        let specs = self.thumbnailsArray[indexPath.row]
+
+        let specs = self.thumbnailsArray[indexPath.row % (self.thumbnailsArray.count - 1)]
         
         if let image = specs.image {
             cell.configureWithImage(image)
         }
         
         return cell
+    }
+    
+    // MARK: UICollectionViewDelegateFlowLayout
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let size = self.randomCellSize
+        return CGSize(width: size, height: size);
     }
     
 }
