@@ -9,15 +9,17 @@
 import Foundation
 import UIKit
 
-let kTypicodeRootURL = "https://jsonplaceholder.typicode.com"
-let kAlbumsExtension = "/albums"
-let kPhotosEndpoint = "/photos"
+
 
 class JPNetworkManager {
     
+    static let kTypicodeRootURL = "https://jsonplaceholder.typicode.com"
+    static let kAlbumsExtension = "/albums"
+    static let kPhotosEndpoint = "/photos"
+    
     func fetchTypicodeAlbumService(_ unit: Int, completion: @escaping (TypicodePhotoSpecsArray?) -> Void) {
         
-        guard let url = URL(string: kTypicodeRootURL + kAlbumsExtension + "/\(unit)" + kPhotosEndpoint) else {
+        guard let url = URL(string: JPNetworkManager.kTypicodeRootURL + JPNetworkManager.kAlbumsExtension + "/\(unit)" + JPNetworkManager.kPhotosEndpoint) else {
             print("Error: cannot create URL")
             return
         }

@@ -28,6 +28,7 @@ extension AlbumViewController: UICollectionViewDelegateFlowLayout {
                 return UICollectionViewCell.init()
         }
         
+        // Doubling collection view size for larger Kaliedescope
         var adjustedRow = indexPath.row
         
         if indexPath.row > (self.thumbnailsArray.count - 1) {

@@ -11,17 +11,13 @@ import UIKit
 
 class JPImageManager  {
     
- //   let cache = Cache()
-    
     func requestImages(random: Int, completion: @escaping (ThumbnailsDataArray?) -> Void) {
         
         DispatchQueue.global(qos: .userInitiated).async { () in
             
-            let manager = JPNetworkManager()
-            manager.fetchTypicodeAlbumService(random, completion: { (albumDetails) in
+            JPNetworkManager().fetchTypicodeAlbumService(random, completion: { (albumDetails) in
                 
                 if let albumDetails = albumDetails {
-                    //self?.cache. write to
                     self.requestImageDataForPhotos(albumDetails, completion: { (dataArray) in
                         completion(dataArray)
                     })
@@ -38,7 +34,6 @@ class JPImageManager  {
         
         let downloadGroup = DispatchGroup()
         let queue = DispatchQueue.global(qos: .default)
-        let manager = JPNetworkManager()
         
         for spec in albumSpecs {
             
@@ -49,7 +44,7 @@ class JPImageManager  {
                 downloadGroup.enter()
                 
                 queue.async {
-                    manager.fetchImageDataService(httpUrl, completion: { (image) in
+                    JPNetworkManager().fetchImageDataService(httpUrl, completion: { (image) in
                         
                         if let image = image {
                             let thumbnailPlusData = JPTypicodeThumbnailPlusImageData(specs: spec, image: image, orderedSpot: spot)

@@ -16,10 +16,9 @@ class AlbumViewController: UICollectionViewController {
     var thumbnailsArray : ThumbnailsDataArray = [] {
         didSet {
             DispatchQueue.main.async { [weak self] in
-                if let randomInt = self?.RandomInt(min: 20, max: 150) {
+                if let randomInt = self?.RandomInt(min: 20, max: 130) {
                     self?.randomCellSize = randomInt
                 }
-                
                 self?.collectionView?.reloadData()
             }
         }
@@ -36,7 +35,7 @@ class AlbumViewController: UICollectionViewController {
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = UIColor.orange
-        refreshControl.addTarget(self, action: #selector(setupKaleidoscope), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(initiateRequest), for: .valueChanged)
         refreshControl.bounds = CGRect(x: refreshControl.bounds.origin.x,
                                        y: 0.0,
                                        width: refreshControl.bounds.size.width,
@@ -62,26 +61,25 @@ class AlbumViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupKaleidoscope()
+        collectionView?.addSubview(self.refreshControl)
+    }
+    
+    
+    // MARK: Private functions
+    
+    private func setupKaleidoscope() {
         DispatchQueue.main.async { [weak self] in
             if let activityIndicator = self?.activityIndicator {
                 self?.collectionView?.addSubview(activityIndicator)
                 activityIndicator.startAnimating()
             }
         }
-        setupKaleidoscope()
-        collectionView?.addSubview(self.refreshControl)
+        initiateRequest()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        self.reloadInputViews()
-    }
-    
-    func setupKaleidoscope() {
-        
+    func initiateRequest () {
         imageManager.requestImages(random: randomAlbum) { (thumbnails) in
-            print("Image manager completion")
             
             DispatchQueue.main.async { [weak self] in
                 if self?.activityIndicator.isAnimating == true {
@@ -94,7 +92,6 @@ class AlbumViewController: UICollectionViewController {
             if let thumbnails = thumbnails {
                 self.thumbnailsArray = thumbnails
             }
-            
         }
     }
     
@@ -102,4 +99,9 @@ class AlbumViewController: UICollectionViewController {
         if max < min { return min }
         return Int(arc4random_uniform(UInt32((max - min) + 1))) + min
     }
+    
+    @IBAction private func refreshButtonTapped(_ sender: AnyObject) {
+        setupKaleidoscope()
+    }
+    
 }
