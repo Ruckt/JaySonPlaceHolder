@@ -16,6 +16,10 @@ class AlbumViewController: UICollectionViewController {
     var thumbnailsArray : ThumbnailsDataArray = [] {
         didSet {
             DispatchQueue.main.async { [weak self] in
+                if let randomInt = self?.RandomInt(min: 20, max: 150) {
+                    self?.randomCellSize = randomInt
+                }
+                
                 self?.collectionView?.reloadData()
             }
         }
@@ -26,6 +30,8 @@ class AlbumViewController: UICollectionViewController {
             return Int(arc4random_uniform(UInt32((100) + 1))) + 1
         }
     }
+    
+    var randomCellSize: Int = 64
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -90,5 +96,10 @@ class AlbumViewController: UICollectionViewController {
             }
             
         }
+    }
+    
+    private func RandomInt(min: Int, max: Int) -> Int {
+        if max < min { return min }
+        return Int(arc4random_uniform(UInt32((max - min) + 1))) + min
     }
 }

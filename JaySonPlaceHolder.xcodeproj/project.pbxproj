@@ -71,9 +71,7 @@
 				E21B37A71F44FF5700D397D7 /* AppDelegate.swift */,
 				E2A9C5FE1F48E30500B66FD7 /* JPTypicodePhoto.swift */,
 				E2FD69251F48ADAB00B792F8 /* Networking */,
-				E2A9C6001F494C0200B66FD7 /* AlbumViewController.swift */,
-				E2A9C6021F4A02B500B66FD7 /* AlbumViewController+DelegateMethods.swift */,
-				E2A9C6041F4A06DB00B66FD7 /* ThumbnailCollectionViewCell.swift */,
+				E2A9C6061F4A352200B66FD7 /* View Controller */,
 				E21B37A91F44FF5700D397D7 /* MasterViewController.swift */,
 				E21B37AB1F44FF5700D397D7 /* DetailViewController.swift */,
 				E21B37AD1F44FF5700D397D7 /* Main.storyboard */,
@@ -82,6 +80,16 @@
 				E21B37B51F44FF5700D397D7 /* Info.plist */,
 			);
 			path = JaySonPlaceHolder;
+			sourceTree = "<group>";
+		};
+		E2A9C6061F4A352200B66FD7 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E2A9C6001F494C0200B66FD7 /* AlbumViewController.swift */,
+				E2A9C6021F4A02B500B66FD7 /* AlbumViewController+DelegateMethods.swift */,
+				E2A9C6041F4A06DB00B66FD7 /* ThumbnailCollectionViewCell.swift */,
+			);
+			name = "View Controller";
 			sourceTree = "<group>";
 		};
 		E2FD69251F48ADAB00B792F8 /* Networking */ = {
