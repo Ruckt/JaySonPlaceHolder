@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "023737ECA4145F7A1EA2763D335CE93D8E483FD3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "7214C18B28E0AEDE0F75EC2C7D734281CA9945F5" : 9223372036854775807,
+    "023737ECA4145F7A1EA2763D335CE93D8E483FD3" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "AC10BA70-3AE0-4187-901E-E92261445785",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "7214C18B28E0AEDE0F75EC2C7D734281CA9945F5" : "",
+    "023737ECA4145F7A1EA2763D335CE93D8E483FD3" : "JaySonPlaceHolder\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "JaySonPlaceHolder",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "JaySonPlaceHolder.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Ruckt\/JaySonPlaceHolder",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "023737ECA4145F7A1EA2763D335CE93D8E483FD3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:Ruckt\/VideoManipulator.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7214C18B28E0AEDE0F75EC2C7D734281CA9945F5"
+    }
+  ]
+}
