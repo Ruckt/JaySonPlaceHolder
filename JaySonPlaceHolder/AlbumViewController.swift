@@ -12,6 +12,7 @@ import UIKit
 class AlbumViewController: UICollectionViewController {
 
     let imageManager = JPImageManager()
+    let multiplier = 4
     
     var thumbnailsArray : ThumbnailsDataArray = [] {
         didSet {

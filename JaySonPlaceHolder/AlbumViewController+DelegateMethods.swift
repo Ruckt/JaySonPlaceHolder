@@ -16,7 +16,7 @@ extension AlbumViewController: UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.thumbnailsArray.count * 2
+        return self.thumbnailsArray.count * self.multiplier
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -27,15 +27,8 @@ extension AlbumViewController: UICollectionViewDelegateFlowLayout {
                 print("Unable to dequeue a thumbnail cell")
                 return UICollectionViewCell.init()
         }
-        
-        // Doubling collection view size for larger Kaliedescope
-        var adjustedRow = indexPath.row
-        
-        if indexPath.row > (self.thumbnailsArray.count - 1) {
-            adjustedRow = indexPath.row - self.thumbnailsArray.count
-        }
-        
-        let specs = self.thumbnailsArray[adjustedRow]
+
+        let specs = self.thumbnailsArray[indexPath.row % (self.thumbnailsArray.count - 1)]
         
         if let image = specs.image {
             cell.configureWithImage(image)

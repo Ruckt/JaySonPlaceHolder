@@ -49,10 +49,7 @@ class JPImageManager  {
                         if let image = image {
                             let thumbnailPlusData = JPTypicodeThumbnailPlusImageData(specs: spec, image: image, orderedSpot: spot)
                             
-                            print("PLUS image data: \(thumbnailPlusData.specs.title!)")
                             DispatchQueue.global(qos: .userInitiated).async(group:downloadGroup) {
-                                print("Data Array: \(dataArray.count)")
-
                                 dataArray.append(thumbnailPlusData)
                             }
                         }
