@@ -7,12 +7,13 @@
 //
 
 import Foundation
+import UIKit
 
 class JPImageManager  {
     
  //   let cache = Cache()
     
-    func requestImages(completion: @escaping (Array<Any>?) -> Void) {
+    func requestImages(completion: @escaping (ThumbnailsDataArray?) -> Void) {
         
     //    get images out of cache first
         
@@ -56,11 +57,12 @@ class JPImageManager  {
                 downloadGroup.enter()
                 
                 queue.async {
-                    manager.fetchImageDataService(httpUrl, completion: { (imageData) in
+                    manager.fetchImageDataService(httpUrl, completion: { (image) in
                         
-                        if let data = imageData {
+                        if let image = image {
+                            print(image)
                             
-                            let thumbnailPlusData = JPTypicodeThumbnailPlusImageData(specs: spec, data: data, orderedSpot: spot)
+                            let thumbnailPlusData = JPTypicodeThumbnailPlusImageData(specs: spec, image: image, orderedSpot: spot)
                             
                             DispatchQueue.global(qos: .userInitiated).async(group:downloadGroup) {
                                 dataArray.append(thumbnailPlusData)

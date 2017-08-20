@@ -14,6 +14,9 @@
 		E21B37B11F44FF5700D397D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E21B37B01F44FF5700D397D7 /* Assets.xcassets */; };
 		E21B37B41F44FF5700D397D7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E21B37B21F44FF5700D397D7 /* LaunchScreen.storyboard */; };
 		E2A9C5FF1F48E30500B66FD7 /* JPTypicodePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A9C5FE1F48E30500B66FD7 /* JPTypicodePhoto.swift */; };
+		E2A9C6011F494C0200B66FD7 /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A9C6001F494C0200B66FD7 /* AlbumViewController.swift */; };
+		E2A9C6031F4A02B500B66FD7 /* AlbumViewController+DelegateMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A9C6021F4A02B500B66FD7 /* AlbumViewController+DelegateMethods.swift */; };
+		E2A9C6051F4A06DB00B66FD7 /* ThumbnailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A9C6041F4A06DB00B66FD7 /* ThumbnailCollectionViewCell.swift */; };
 		E2FD69271F48AE0A00B792F8 /* JPNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD69261F48AE0A00B792F8 /* JPNetworkManager.swift */; };
 		E2FD69291F48B2C700B792F8 /* JPImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD69281F48B2C700B792F8 /* JPImageManager.swift */; };
 /* End PBXBuildFile section */
@@ -28,6 +31,9 @@
 		E21B37B31F44FF5700D397D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E21B37B51F44FF5700D397D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2A9C5FE1F48E30500B66FD7 /* JPTypicodePhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JPTypicodePhoto.swift; sourceTree = "<group>"; };
+		E2A9C6001F494C0200B66FD7 /* AlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
+		E2A9C6021F4A02B500B66FD7 /* AlbumViewController+DelegateMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlbumViewController+DelegateMethods.swift"; sourceTree = "<group>"; };
+		E2A9C6041F4A06DB00B66FD7 /* ThumbnailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailCollectionViewCell.swift; sourceTree = "<group>"; };
 		E2FD69261F48AE0A00B792F8 /* JPNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JPNetworkManager.swift; sourceTree = "<group>"; };
 		E2FD69281F48B2C700B792F8 /* JPImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JPImageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,9 +68,12 @@
 		E21B37A61F44FF5700D397D7 /* JaySonPlaceHolder */ = {
 			isa = PBXGroup;
 			children = (
+				E21B37A71F44FF5700D397D7 /* AppDelegate.swift */,
 				E2A9C5FE1F48E30500B66FD7 /* JPTypicodePhoto.swift */,
 				E2FD69251F48ADAB00B792F8 /* Networking */,
-				E21B37A71F44FF5700D397D7 /* AppDelegate.swift */,
+				E2A9C6001F494C0200B66FD7 /* AlbumViewController.swift */,
+				E2A9C6021F4A02B500B66FD7 /* AlbumViewController+DelegateMethods.swift */,
+				E2A9C6041F4A06DB00B66FD7 /* ThumbnailCollectionViewCell.swift */,
 				E21B37A91F44FF5700D397D7 /* MasterViewController.swift */,
 				E21B37AB1F44FF5700D397D7 /* DetailViewController.swift */,
 				E21B37AD1F44FF5700D397D7 /* Main.storyboard */,
@@ -159,10 +168,13 @@
 			files = (
 				E2FD69271F48AE0A00B792F8 /* JPNetworkManager.swift in Sources */,
 				E21B37AC1F44FF5700D397D7 /* DetailViewController.swift in Sources */,
+				E2A9C6051F4A06DB00B66FD7 /* ThumbnailCollectionViewCell.swift in Sources */,
 				E2FD69291F48B2C700B792F8 /* JPImageManager.swift in Sources */,
 				E21B37AA1F44FF5700D397D7 /* MasterViewController.swift in Sources */,
 				E21B37A81F44FF5700D397D7 /* AppDelegate.swift in Sources */,
 				E2A9C5FF1F48E30500B66FD7 /* JPTypicodePhoto.swift in Sources */,
+				E2A9C6031F4A02B500B66FD7 /* AlbumViewController+DelegateMethods.swift in Sources */,
+				E2A9C6011F494C0200B66FD7 /* AlbumViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

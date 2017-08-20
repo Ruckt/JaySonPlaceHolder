@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import UIKit
 
 struct JPTypicodePhotoSpecs {
     var albumId: Int?
@@ -22,7 +22,7 @@ typealias TypicodePhotoSpecsArray = [JPTypicodePhotoSpecs]
 
 struct JPTypicodeThumbnailPlusImageData {
     var specs: JPTypicodePhotoSpecs
-    var data: Data
+    var image: UIImage?
     var orderedSpot: Int
 }
 

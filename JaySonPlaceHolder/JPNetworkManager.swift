@@ -77,7 +77,7 @@ class JPNetworkManager {
         task.resume()
     }
     
-    func fetchImageDataService(_ url: URL, completion: @escaping (Data?) -> Void) {
+    func fetchImageDataService(_ url: URL, completion: @escaping (UIImage?) -> Void) {
         
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: url) { (data, response, error) in
@@ -95,16 +95,7 @@ class JPNetworkManager {
                 
                 if let data = data,
                     let image = UIImage(data: data) {
-                    
-                    guard let imageData = UIImagePNGRepresentation(image)
-                        else {
-                            print("Unable to create image")
-                            completion(nil)
-                            return
-                    }
-                    
-                    completion(imageData)
-                    return
+                    completion(image)
                 } else {
                     completion(nil)
                 }
