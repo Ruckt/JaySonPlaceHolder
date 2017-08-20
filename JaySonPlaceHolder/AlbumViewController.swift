@@ -11,7 +11,6 @@ import UIKit
 
 class AlbumViewController: UICollectionViewController {
 
-    
     let imageManager = JPImageManager()
     
     var thumbnailsArray : ThumbnailsDataArray = [] {
@@ -22,10 +21,16 @@ class AlbumViewController: UICollectionViewController {
         }
     }
     
+    var randomAlbum : Int {
+        get {
+            return Int(arc4random_uniform(UInt32((100) + 1))) + 1
+        }
+    }
+    
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = UIColor.orange
- //       refreshControl.addTarget(self, action: #selector(self.refreshEmojis), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(setupKaleidoscope), for: .valueChanged)
         refreshControl.bounds = CGRect(x: refreshControl.bounds.origin.x,
                                        y: 0.0,
                                        width: refreshControl.bounds.size.width,
@@ -48,11 +53,17 @@ class AlbumViewController: UICollectionViewController {
         
         return activityIndicator
     }()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
+        
+        DispatchQueue.main.async { [weak self] in
+            if let activityIndicator = self?.activityIndicator {
+                self?.collectionView?.addSubview(activityIndicator)
+                activityIndicator.startAnimating()
+            }
+        }
+        setupKaleidoscope()
         collectionView?.addSubview(self.refreshControl)
     }
     
@@ -61,30 +72,23 @@ class AlbumViewController: UICollectionViewController {
 //        self.reloadInputViews()
     }
     
-    func setup() {
+    func setupKaleidoscope() {
         
-        if thumbnailsArray.count == 0 {
-            
-            DispatchQueue.main.async { [weak self] in
-                if let activityIndicator = self?.activityIndicator {
-                    self?.collectionView?.addSubview(activityIndicator)
-                    activityIndicator.startAnimating()
-                }
-            }
-        }
-        
-        imageManager.requestImages { (thumbnails) in
+        imageManager.requestImages(random: randomAlbum) { (thumbnails) in
             print("Image manager completion")
             
             DispatchQueue.main.async { [weak self] in
+                if self?.activityIndicator.isAnimating == true {
                     self?.activityIndicator.stopAnimating()
                     self?.activityIndicator.removeFromSuperview()
+                }
+                self?.refreshControl.endRefreshing()
             }
             
             if let thumbnails = thumbnails {
                 self.thumbnailsArray = thumbnails
             }
-        
+            
         }
     }
 }
