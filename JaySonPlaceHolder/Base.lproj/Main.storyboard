@@ -38,30 +38,34 @@
                             <size key="itemSize" width="80" height="80"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ThumbnailImageCellID" id="nCp-ZF-nvC" customClass="ThumbnailCollectionViewCell" customModule="JaySonPlaceHolder" customModuleProvider="target">
-                                <rect key="frame" x="10" y="0.0" width="80" height="80"/>
+                                <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fea-XO-qk2">
-                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                            <rect key="frame" x="8" y="8" width="64" height="64"/>
                                         </imageView>
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstAttribute="bottomMargin" secondItem="fea-XO-qk2" secondAttribute="bottom" constant="-8" id="MQt-g3-Uey"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="fea-XO-qk2" secondAttribute="trailing" constant="-8" id="W5s-dy-D2k"/>
-                                    <constraint firstItem="fea-XO-qk2" firstAttribute="top" secondItem="nCp-ZF-nvC" secondAttribute="topMargin" constant="-8" id="YmI-lI-fjw"/>
-                                    <constraint firstItem="fea-XO-qk2" firstAttribute="leading" secondItem="nCp-ZF-nvC" secondAttribute="leadingMargin" constant="-8" id="upj-PI-EeV"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="fea-XO-qk2" secondAttribute="bottom" id="MQt-g3-Uey"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="fea-XO-qk2" secondAttribute="trailing" id="W5s-dy-D2k"/>
+                                    <constraint firstItem="fea-XO-qk2" firstAttribute="top" secondItem="nCp-ZF-nvC" secondAttribute="topMargin" id="YmI-lI-fjw"/>
+                                    <constraint firstItem="fea-XO-qk2" firstAttribute="leading" secondItem="nCp-ZF-nvC" secondAttribute="leadingMargin" id="upj-PI-EeV"/>
                                 </constraints>
                                 <size key="customSize" width="80" height="80"/>
                                 <connections>
+                                    <outlet property="bottomPadding" destination="MQt-g3-Uey" id="3CL-9H-WdN"/>
                                     <outlet property="imageView" destination="fea-XO-qk2" id="2qY-Jm-uS8"/>
+                                    <outlet property="leftPadding" destination="upj-PI-EeV" id="Z2s-kz-uZP"/>
+                                    <outlet property="rightPadding" destination="W5s-dy-D2k" id="8en-zy-Sce"/>
+                                    <outlet property="topPadding" destination="YmI-lI-fjw" id="kjB-CO-A0b"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -80,7 +84,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aUY-MF-smg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="-730"/>
+            <point key="canvasLocation" x="900" y="-630"/>
         </scene>
     </scenes>
 </document>

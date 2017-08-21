@@ -31,7 +31,7 @@ extension AlbumViewController: UICollectionViewDelegateFlowLayout {
         let specs = self.thumbnailsArray[indexPath.row % (self.thumbnailsArray.count - 1)]
         
         if let image = specs.image {
-            cell.configureWithImage(image)
+            cell.configureWithImage(image, CGFloat(self.randomPadding))
         }
         
         return cell
