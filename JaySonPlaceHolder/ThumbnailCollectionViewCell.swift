@@ -12,6 +12,10 @@ import UIKit
 class ThumbnailCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var imageView: UIImageView!
+    @IBOutlet var leftPadding: NSLayoutConstraint!
+    @IBOutlet var rightPadding: NSLayoutConstraint!
+    @IBOutlet var topPadding: NSLayoutConstraint!
+    @IBOutlet var bottomPadding: NSLayoutConstraint!
     
     static let kCellIdentifier = "ThumbnailImageCellID"
     
@@ -20,7 +24,13 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         self.imageView.image = nil
     }
     
-    func configureWithImage(_ image: UIImage?) {
+    func configureWithImage(_ image: UIImage?, _ padding: CGFloat) {
+        
+        leftPadding.constant = padding
+        rightPadding.constant = padding
+        bottomPadding.constant = padding
+        topPadding.constant = padding
+        
         if let image = image {
             self.imageView.image = image
         }

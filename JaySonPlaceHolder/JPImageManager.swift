@@ -50,8 +50,14 @@ class JPImageManager  {
                             let thumbnailPlusData = JPTypicodeThumbnailPlusImageData(specs: spec, image: image, orderedSpot: spot)
                             
                             DispatchQueue.global(qos: .userInitiated).async(group:downloadGroup) {
-                                dataArray.append(thumbnailPlusData)
+                                let serialQueue = DispatchQueue(label: "syncQueue")
+                                
+                                serialQueue.sync {
+                                    dataArray.append(thumbnailPlusData)
+                                }
+                                
                             }
+                            
                         }
                         downloadGroup.leave()
                     })
@@ -60,7 +66,10 @@ class JPImageManager  {
         }
         
         downloadGroup.notify(queue: queue) {
-            dataArray.sort{ $0.orderedSpot < $1.orderedSpot }
+            let serialQueue = DispatchQueue(label: "sortQueue")
+            serialQueue.sync {
+                dataArray.sort{ $0.orderedSpot < $1.orderedSpot }
+            }
             completion(dataArray)
         }
     }

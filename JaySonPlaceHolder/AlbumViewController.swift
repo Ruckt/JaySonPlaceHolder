@@ -12,14 +12,19 @@ import UIKit
 class AlbumViewController: UICollectionViewController {
 
     let imageManager = JPImageManager()
-    let multiplier = 10
+    let multiplier = 12
     var randomCellSize: Int = 10
-    var randomLineSpace: Int = 0
+    var randomPadding: Int = 0
+    var requestInProgress : Bool = false
     
     var thumbnailsArray : ThumbnailsDataArray = [] {
         didSet {
-            randomCellSize = self.RandomInt(min: 5, max: 90)
-            randomLineSpace = self.RandomInt(min: 0, max: 30)
+            randomCellSize = self.RandomInt(min: 10, max: 90)
+            randomPadding = self.RandomInt(min: -8, max: 10)
+            
+            if randomPadding > (randomCellSize/2 - 5) {
+                randomPadding = randomCellSize/2 - 5
+            }
             
             DispatchQueue.main.async { [weak self] in
                 self?.collectionView?.reloadData()
@@ -29,7 +34,7 @@ class AlbumViewController: UICollectionViewController {
     
     var randomAlbum : Int {
         get {
-            return Int(arc4random_uniform(UInt32((100) + 1))) + 1
+            return Int(arc4random_uniform(UInt32(100))) + 1
         }
     }
     
@@ -69,7 +74,7 @@ class AlbumViewController: UICollectionViewController {
     
     // MARK: Private functions
     
-    private func setupKaleidoscope() {
+    func setupKaleidoscope() {
         DispatchQueue.main.async { [weak self] in
             if let activityIndicator = self?.activityIndicator {
                 self?.collectionView?.addSubview(activityIndicator)
@@ -80,18 +85,22 @@ class AlbumViewController: UICollectionViewController {
     }
     
     func initiateRequest () {
-        imageManager.requestImages(random: randomAlbum) { (thumbnails) in
-            
-            DispatchQueue.main.async { [weak self] in
-                if self?.activityIndicator.isAnimating == true {
-                    self?.activityIndicator.stopAnimating()
-                    self?.activityIndicator.removeFromSuperview()
+        if self.requestInProgress != true {
+            self.requestInProgress = true
+            imageManager.requestImages(random: randomAlbum) {  [weak self] (thumbnails) in
+                
+                DispatchQueue.main.async { [weak self] in
+                    if self?.activityIndicator.isAnimating == true {
+                        self?.activityIndicator.stopAnimating()
+                        self?.activityIndicator.removeFromSuperview()
+                    }
+                    self?.refreshControl.endRefreshing()
                 }
-                self?.refreshControl.endRefreshing()
-            }
-            
-            if let thumbnails = thumbnails {
-                self.thumbnailsArray = thumbnails
+                
+                if let thumbnails = thumbnails {
+                    self?.thumbnailsArray = thumbnails
+                    self?.requestInProgress = false
+                }
             }
         }
     }

@@ -31,7 +31,7 @@ extension AlbumViewController: UICollectionViewDelegateFlowLayout {
         let specs = self.thumbnailsArray[indexPath.row % (self.thumbnailsArray.count - 1)]
         
         if let image = specs.image {
-            cell.configureWithImage(image)
+            cell.configureWithImage(image, CGFloat(self.randomPadding))
         }
         
         return cell
@@ -42,10 +42,6 @@ extension AlbumViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = self.randomCellSize
         return CGSize(width: size, height: size);
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return CGFloat(self.randomLineSpace)
     }
     
 }

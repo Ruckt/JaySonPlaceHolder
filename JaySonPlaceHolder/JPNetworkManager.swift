@@ -30,7 +30,7 @@ class JPNetworkManager {
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         
-        print(urlRequest)
+        //print(urlRequest)
         
         let task = session.dataTask(with: urlRequest) { (data, response, error) in
             
