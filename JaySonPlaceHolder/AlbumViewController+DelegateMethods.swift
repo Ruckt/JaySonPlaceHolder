@@ -44,4 +44,8 @@ extension AlbumViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: size, height: size);
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return CGFloat(self.randomLineSpace)
+    }
+    
 }

@@ -12,14 +12,16 @@ import UIKit
 class AlbumViewController: UICollectionViewController {
 
     let imageManager = JPImageManager()
-    let multiplier = 4
+    let multiplier = 10
+    var randomCellSize: Int = 10
+    var randomLineSpace: Int = 0
     
     var thumbnailsArray : ThumbnailsDataArray = [] {
         didSet {
+            randomCellSize = self.RandomInt(min: 5, max: 90)
+            randomLineSpace = self.RandomInt(min: 0, max: 30)
+            
             DispatchQueue.main.async { [weak self] in
-                if let randomInt = self?.RandomInt(min: 20, max: 130) {
-                    self?.randomCellSize = randomInt
-                }
                 self?.collectionView?.reloadData()
             }
         }
@@ -30,8 +32,6 @@ class AlbumViewController: UICollectionViewController {
             return Int(arc4random_uniform(UInt32((100) + 1))) + 1
         }
     }
-    
-    var randomCellSize: Int = 64
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
