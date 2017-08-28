@@ -18,13 +18,13 @@ class AlbumViewController: UICollectionViewController {
     var requestInProgress : Bool = false
     
     var thumbnailsArray : ThumbnailsDataArray = [] {
+        
+        willSet{
+            randomCellSize = self.RandomInt(min: 20, max: 90)
+            randomPadding = self.RandomInt(min: -8, max: randomCellSize/2 - 20)
+        }
+        
         didSet {
-            randomCellSize = self.RandomInt(min: 10, max: 90)
-            randomPadding = self.RandomInt(min: -8, max: 10)
-            
-            if randomPadding > (randomCellSize/2 - 5) {
-                randomPadding = randomCellSize/2 - 5
-            }
             
             DispatchQueue.main.async { [weak self] in
                 self?.collectionView?.reloadData()
@@ -89,7 +89,7 @@ class AlbumViewController: UICollectionViewController {
             self.requestInProgress = true
             imageManager.requestImages(random: randomAlbum) {  [weak self] (thumbnails) in
                 
-                DispatchQueue.main.async { [weak self] in
+                DispatchQueue.main.async { () in
                     if self?.activityIndicator.isAnimating == true {
                         self?.activityIndicator.stopAnimating()
                         self?.activityIndicator.removeFromSuperview()
