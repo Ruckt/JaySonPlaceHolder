@@ -15,11 +15,14 @@ class JPImageManager  {
         
         DispatchQueue.global(qos: .userInitiated).async { () in
             
-            JPNetworkManager().fetchTypicodeAlbumService(random, completion: { (albumDetails) in
+            JPNetworkManager().fetchTypicodeAlbumService(random, completion: {[weak self] (albumDetails) in
                 
                 if let albumDetails = albumDetails {
-                    self.requestImageDataForPhotos(albumDetails, completion: { (dataArray) in
-                        completion(dataArray)
+                    self?.requestImageDataForPhotos(albumDetails, completion: { (dataArray) in
+                        
+                        DispatchQueue(label: "sortQueue").sync {
+                            completion(dataArray.sorted{ $0.orderedSpot < $1.orderedSpot })
+                        }
                     })
                 } else {
                     completion(nil)
@@ -50,14 +53,11 @@ class JPImageManager  {
                             let thumbnailPlusData = JPTypicodeThumbnailPlusImageData(specs: spec, image: image, orderedSpot: spot)
                             
                             DispatchQueue.global(qos: .userInitiated).async(group:downloadGroup) {
-                                let serialQueue = DispatchQueue(label: "syncQueue")
                                 
-                                serialQueue.sync {
+                                DispatchQueue(label: "syncQueue").sync {
                                     dataArray.append(thumbnailPlusData)
                                 }
-                                
                             }
-                            
                         }
                         downloadGroup.leave()
                     })
@@ -66,10 +66,6 @@ class JPImageManager  {
         }
         
         downloadGroup.notify(queue: queue) {
-            let serialQueue = DispatchQueue(label: "sortQueue")
-            serialQueue.sync {
-                dataArray.sort{ $0.orderedSpot < $1.orderedSpot }
-            }
             completion(dataArray)
         }
     }
