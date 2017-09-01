@@ -67,6 +67,7 @@ class AlbumViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupKaleidoscope()
         collectionView?.addSubview(self.refreshControl)
     }
@@ -75,12 +76,9 @@ class AlbumViewController: UICollectionViewController {
     // MARK: Private functions
     
     func setupKaleidoscope() {
-        DispatchQueue.main.async { [weak self] in
-            if let activityIndicator = self?.activityIndicator {
-                self?.collectionView?.addSubview(activityIndicator)
-                activityIndicator.startAnimating()
-            }
-        }
+        self.collectionView?.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        
         initiateRequest()
     }
     

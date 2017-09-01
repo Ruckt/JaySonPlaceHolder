@@ -13,14 +13,17 @@ class JPImageManager  {
     
     func requestImages(random: Int, completion: @escaping (ThumbnailsDataArray?) -> Void) {
         
-        DispatchQueue.global(qos: .userInitiated).async { () in
+        let queue = DispatchQueue(label: "requestImages", qos: .userInitiated)
+        
+        queue.async {
             
             JPNetworkManager().fetchTypicodeAlbumService(random, completion: {[weak self] (albumDetails) in
                 
                 if let albumDetails = albumDetails {
                     self?.requestImageDataForPhotos(albumDetails, completion: { (dataArray) in
                         
-                        DispatchQueue(label: "sortQueue").sync {
+                        let sortQueue  = DispatchQueue(label: "sortQueue", qos: .userInteractive)
+                        sortQueue.sync {
                             completion(dataArray.sorted{ $0.orderedSpot < $1.orderedSpot })
                         }
                     })
@@ -36,7 +39,7 @@ class JPImageManager  {
         var dataArray = ThumbnailsDataArray()
         
         let downloadGroup = DispatchGroup()
-        let queue = DispatchQueue.global(qos: .default)
+        let queue = DispatchQueue(label: "requestImageData", qos: .userInteractive)
         
         for spec in albumSpecs {
             
@@ -44,19 +47,15 @@ class JPImageManager  {
                 let urlString = spec.thumbnailUrl,
                 let httpUrl = URL(string: urlString) {
                 
-                downloadGroup.enter()
-                
-                queue.async {
+                queue.async(group:downloadGroup) {
+                    downloadGroup.enter()
                     JPNetworkManager().fetchImageDataService(httpUrl, completion: { (image) in
                         
-                        if let image = image {
-                            let thumbnailPlusData = JPTypicodeThumbnailPlusImageData(specs: spec, image: image, orderedSpot: spot)
+                        let fetchQueue = DispatchQueue(label: "fetchQueue", qos: .userInteractive)
+                        fetchQueue.async {
                             
-                            DispatchQueue.global(qos: .userInitiated).async(group:downloadGroup) {
-                                
-                                DispatchQueue(label: "syncQueue").sync {
-                                    dataArray.append(thumbnailPlusData)
-                                }
+                            if let image = image {
+                                dataArray.append(JPTypicodeThumbnailPlusImageData(specs: spec, image: image, orderedSpot: spot))
                             }
                         }
                         downloadGroup.leave()
