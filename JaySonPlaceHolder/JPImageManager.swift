@@ -52,7 +52,7 @@ class JPImageManager  {
                     JPNetworkManager().fetchImageDataService(httpUrl, completion: { (image) in
                         
                         let fetchQueue = DispatchQueue(label: "fetchQueue", qos: .userInteractive)
-                        fetchQueue.async {
+                        fetchQueue.sync {
                             
                             if let image = image {
                                 dataArray.append(JPTypicodeThumbnailPlusImageData(specs: spec, image: image, orderedSpot: spot))
