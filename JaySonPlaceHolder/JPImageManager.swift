@@ -21,8 +21,7 @@ class JPImageManager  {
                 
                 if let albumDetails = albumDetails {
                     self?.requestImageDataForPhotos(albumDetails, completion: { (dataArray) in
-                        
-                        let sortQueue  = DispatchQueue(label: "sortQueue", qos: .userInteractive)
+                        let sortQueue  = DispatchQueue(label: "sortQueue")
                         sortQueue.sync {
                             completion(dataArray.sorted{ $0.orderedSpot < $1.orderedSpot })
                         }
@@ -37,9 +36,10 @@ class JPImageManager  {
     private func requestImageDataForPhotos(_ albumSpecs: TypicodePhotoSpecsArray, completion: @escaping(_ thumbnail: ThumbnailsDataArray) -> Void) {
         
         var dataArray = ThumbnailsDataArray()
+        dataArray.reserveCapacity(50)
         
         let downloadGroup = DispatchGroup()
-        let queue = DispatchQueue(label: "requestImageData", qos: .userInteractive)
+        let queue = DispatchQueue(label: "requestImageData")
         
         for spec in albumSpecs {
             
@@ -51,7 +51,7 @@ class JPImageManager  {
                     downloadGroup.enter()
                     JPNetworkManager().fetchImageDataService(httpUrl, completion: { (image) in
                         
-                        let fetchQueue = DispatchQueue(label: "fetchQueue", qos: .userInteractive)
+                        let fetchQueue = DispatchQueue(label: "fetchQueue")
                         fetchQueue.sync {
                             
                             if let image = image {

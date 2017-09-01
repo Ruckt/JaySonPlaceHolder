@@ -25,7 +25,6 @@ class AlbumViewController: UICollectionViewController {
         }
         
         didSet {
-            
             DispatchQueue.main.async { [weak self] in
                 self?.collectionView?.reloadData()
             }
